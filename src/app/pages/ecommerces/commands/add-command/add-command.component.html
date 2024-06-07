@@ -1,0 +1,44 @@
+<div class="container" style="background-color:white ;padding: 20px;">
+    <h2>Edit Command</h2>
+    <form [formGroup]="editCommandForm" (ngSubmit)="saveEditedCommand()">
+      <div class="mb-3">
+        <label for="customerFirstName" class="form-label">Customer First Name:</label>
+        <input type="text" formControlName="customerFirstName" class="form-control" />
+      </div>
+  
+      <div class="mb-3">
+        <label for="customerLastName" class="form-label">Customer Last Name:</label>
+        <input type="text" formControlName="customerLastName" class="form-control" />
+      </div>
+  
+      <div class="mb-3">
+        <label for="customerEmail" class="form-label">Customer Email:</label>
+        <input type="email" formControlName="customerEmail" class="form-control" />
+      </div>
+  
+      <div class="mb-3">
+        <label for="phoneNumber" class="form-label">Phone Number:</label>
+        <input type="tel" formControlName="phoneNumber" class="form-control" />
+      </div>
+  
+      <div class="mb-3">
+        <label for="shippingAddress" class="form-label">Shipping Address:</label>
+        <textarea formControlName="shippingAddress" class="form-control"></textarea>
+      </div>
+  
+      <div class="mb-3">
+        <label for="method" class="form-label">Shipping Method:</label>
+        <input type="text" formControlName="method" class="form-control" />
+      </div>
+  
+      <div class="mb-3 form-check">
+        <input type="checkbox" formControlName="confirmed" class="form-check-input" id="confirmedCheckbox" />
+        <label class="form-check-label" for="confirmedCheckbox">Confirmed</label>
+      </div>
+  
+      <!-- Add other form fields as needed... -->
+  
+      <button type="submit" class="btn btn-success">Save Changes</button>
+    </form>
+  </div>
+  

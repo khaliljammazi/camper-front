@@ -1,0 +1,103 @@
+
+
+        <!-- main header -->
+        <header class="main-header header-style-one">
+            <div class="header-lower">
+                <div class="logo-box">
+                    <figure class="logo"><a [routerLink]="['/']"><img src="assets/images/logo.png" alt=""></a></figure>
+                </div>
+                <div class="outer-box">
+                    <div class="menu-area">
+                        <!--Mobile Navigation Toggler-->
+                        <div class="mobile-nav-toggler">
+                            <i class="icon-bar"></i>
+                            <i class="icon-bar"></i>
+                            <i class="icon-bar"></i>
+                        </div>
+                        <nav class="main-menu navbar-expand-md navbar-light">
+                            <div class="collapse navbar-collapse show clearfix" id="navbarSupportedContent">
+                                <ul class="navigation clearfix">
+                                    <li class="dropdown"><a routerLink="/">Home</a>
+                                       
+                                    </li> 
+                                    <li class=" dropdown"><a routerLink="/activities">Activities</a>
+                                    </li>
+                            
+                                    <li class="dropdown"><a routerLink="blog">Forum</a>
+                                     
+                                    </li>                              
+                                    <li><a routerLink="contact">contact</a></li>
+                                    <li><a routerLink="products">Products</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="menu-right-content">
+                        <div class="d-flex pe-2 mt-1">
+                            <button *ngIf="isAdmin" type="button" class="btn btn-sm btn-success waves-effect" [routerLink]="['/admin']">Admin panel</button>
+                        </div>
+                        <div class="search-box-outer">
+                            <button *ngIf="isAdmin" type="button" class="btn w-sm " style="background-color:withe ; color:black;" [routerLink]="['/admin']"><i class="fas fa-user-cog font-24"></i></button>
+                        </div>
+                        <div class="search-box-outer">
+                            <div class="dropdown">
+                                <button *ngIf="!!loggedInUser && loggedInUser.id > 0 else elseBlock" class="search-box-btn" type="button" id="auth" [routerLink]="['/auth/logout']">
+                                    <i class="icon-logout"></i>
+                                </button>
+                                <ng-template #elseBlock >
+                                    <button class="search-box-btn" type="button" id="auth" [routerLink]="['/auth/signin-signup']">
+                                        <i class="icon-login"></i>
+                                    </button>
+                                </ng-template>
+                            </div>
+                        </div>
+                        <div class="search-box-outer">
+                            <div class="dropdown">
+                                <button class="search-box-btn" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flaticon-magnifying-glass"></i></button>
+                                <div class="dropdown-menu search-panel" aria-labelledby="dropdownMenu3">
+                                    <div class="form-container">
+                                        <form method="post" action="blog.html">
+                                            <div class="form-group">
+                                                <input type="search" name="search-field" value="" placeholder="Search...." required="">
+                                                <button type="submit" class="search-btn"><span class="fas fa-search"></span></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!--sticky Header-->
+            <div class="sticky-header">
+                <div class="outer-box">
+                    <div class="menu-area">
+                        <nav class="main-menu clearfix">
+                            <!--Keep This Empty / Menu will come through Javascript-->
+                        </nav>
+                    </div>
+                    <div class="menu-right-content">
+                        <div class="support-box">
+                            <div class="icon"><i class="flaticon-chat"></i></div>
+                            <span>Call Anytime</span>
+                            <h5><a href="tel:12463330079">+1- ( 246 ) 333 - 0079</a></h5>
+                        </div>
+                        <div class="search-box-outer">
+                            <div class="dropdown">
+                                <button class="search-box-btn" type="button" id="dropdownMenu4" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flaticon-magnifying-glass"></i></button>
+                                <div class="dropdown-menu search-panel" aria-labelledby="dropdownMenu4">
+                                    <div class="form-container">
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- main-header end -->

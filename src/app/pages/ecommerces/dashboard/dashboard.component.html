@@ -1,0 +1,195 @@
+<!-- page title -->
+<app-page-title [breadcrumbItems]="pageTitle" title="Ecommerce Dashboard"></app-page-title>
+
+
+<div class="row">
+    <div class="col-md-6 col-xl-4">
+        <app-widget-statistics-card4 variant="primary" iconContainerClass="rounded bg-soft-primary"
+            description="Total Revenue" [stats]="totalPriceSum" icon="dripicons-wallet" [options]="{prefix:'DT'}">
+        </app-widget-statistics-card4>
+
+    </div> <!-- end col-->
+
+    <div class="col-md-6 col-xl-4">
+        <app-widget-statistics-card4 variant="success" iconContainerClass="rounded bg-soft-success" description="Orders"
+            [stats]="totalItems" icon="dripicons-basket">
+        </app-widget-statistics-card4>
+
+    </div> <!-- end col-->
+
+    <div class="col-md-6 col-xl-4">
+        <app-widget-statistics-card4 variant="info" iconContainerClass="rounded bg-soft-info" description="Products"
+            [stats]="totalProducts" icon="dripicons-store">
+        </app-widget-statistics-card4>
+
+    </div> <!-- end col-->
+
+     <!-- end col-->
+</div>
+<!-- end row -->
+
+
+<div class="row">
+    <div class="col-xl-8">
+        <div class="card">
+            <div class="card-body pb-0">
+                <div class="float-end d-none d-md-inline-block">
+                    <div class="btn-group mb-2">
+                        <button type="button" class="btn btn-xs btn-light">Today</button>
+                        <button type="button" class="btn btn-xs btn-light">Weekly</button>
+                        <button type="button" class="btn btn-xs btn-secondary">Monthly</button>
+                    </div>
+                </div>
+
+                <h4 class="header-title mb-3">Ecommerce Analytics</h4>
+
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <p class="text-muted mb-0 mt-3">Total Revenue</p>
+                        <h2 class="fw-normal mb-3">
+                            <small class="mdi mdi-checkbox-blank-circle text-primary align-middle me-1"></small>
+                            <span>{{totalPriceSum}}DT</span>
+                        </h2>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="text-muted mb-0 mt-3">Orders</p>
+                        <h2 class="fw-normal mb-3">
+                            <small class="mdi mdi-checkbox-blank-circle text-success align-middle me-1"></small>
+                            <span>{{totalItems}}</span>
+                        </h2>
+                    </div>
+                    <div class="col-md-4">
+                        <p class="text-muted mb-0 mt-3">Products</p>
+                        <h2 class="fw-normal mb-3">
+                            <small class="mdi mdi-checkbox-blank-circle text-success align-middle me-1"></small>
+                            <span>{{totalProducts}}</span>
+                        </h2>
+                    </div>
+                </div>
+                <div id="revenue-chart" class="mt-3">
+
+                    <apx-chart class="apex-charts" [series]="salesChart.series!" [chart]="salesChart.chart!"
+                        [xaxis]="salesChart.xaxis!" [stroke]="salesChart.stroke!" [fill]="salesChart.fill!"
+                        [dataLabels]="salesChart.dataLabels!" [colors]="salesChart.colors!" [yaxis]="salesChart.yaxis!"
+                        [legend]="salesChart.legend!" [labels]="salesChart.labels!" *ngIf="salesChart">
+                    </apx-chart>
+
+                </div>
+            </div>
+        </div>
+    </div> <!-- end col-->
+
+    <div class="col-xl-4">
+        <div class="card">
+            <div class="card-body">
+               
+
+                <h4 class="header-title mb-0">Total Revenue</h4>
+
+                <div class="widget-chart text-center" dir="ltr">
+
+
+                    <div class="mt-4">
+                        <app-widget-world-map mapId="world-map-markers" height="230px" width="100%"
+                            [options]="worldMapConfig">
+                        </app-widget-world-map>
+                    </div>
+
+                    <h5 class="text-muted mt-4">Total sales made today</h5>
+                    <h2>{{totalPriceSum}}DT</h2>
+
+                    <p class="text-muted w-75 mx-auto sp-line-2">Traditional heading elements are designed to work best
+                        in the meat of your page content.</p>
+
+                   
+                </div>
+            </div>
+        </div> <!-- end card -->
+    </div> <!-- end col-->
+</div>
+<!-- end row -->
+
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-3">Transaction History</h4>
+
+                <div class="table-responsive">
+                    <table class="table table-centered table-nowrap table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">Command Id</th>
+                                <th class="border-top-0">Card Type</th>
+                                <th class="border-top-0">Date</th>
+                                <th class="border-top-0">Payment Response</th>
+                                <th class="border-top-0">Payment Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let transaction of payments">
+                                <td>
+                                    <img src="https://spng.pngfind.com/pngs/s/143-1434681_digicollect-cart-icon-png-download-submit-order-icon.png" alt="user-pic"
+                                        class="rounded-circle avatar-sm bx-shadow-lg" />
+                                    <span class="ms-2">{{transaction.commandId}}</span>
+                                </td>
+                                <td>
+                                    <img src="https://www.pngitem.com/pimgs/m/116-1162156_credit-card-png-credit-card-transparent-png.png" alt="user-card" height="20" />
+                                    <span class="ms-2" *ngIf="transaction.paymentMethod=='pm_card_visa'">Visa Card</span>
+                                </td>
+                                <td>{{transaction.createdAt | date:'dd MMM yyyy'}}</td>
+                                <td *ngIf="transaction.paymentResponse.includes('pi_')">pi_************</td>
+                                <td><span class="badge rounded-pill bg-danger"style="font-size:15px ;padding: 5px;"
+                                        *ngIf="transaction.paymentStatus==='Failed'">Failed</span>
+                                    <span class="badge rounded-pill bg-success"style="font-size:15px ;padding: 5px;"
+                                        *ngIf="transaction.paymentStatus==='PAID'">Paid</span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div> <!-- end table-responsive -->
+            </div>
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+    <div class="col-xl-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="header-title mb-3">Recent Five Orders</h4>
+
+                <div class="table-responsive">
+                    <table class="table table-centered table-nowrap table-hover mb-0" >
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">Product</th>
+                                <th class="border-top-0"> Customer Name</th>
+                                <th class="border-top-0">Added Date</th>
+                                <th class="border-top-0">Amount</th>
+                                <th class="border-top-0">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let command of commands.slice(commands.length - 5)">
+                                <td>
+                                    <img [src]="command.productCommands[0]?.product?.image" alt="product-pic" height="36" />
+                                    <span class="ms-2"></span>
+                                </td>
+                                <td>
+                                    {{command.customerFirstName}} {{command.customerLastName}} 
+                                </td>
+                                <td>{{command.createdAt | date:'dd MMM yyyy' }}</td>
+                                <td>{{command.productCommands[0]?.priceTotal}}</td>
+                                <td><span class="badge bg-soft-success text-success"style="font-size:15px ;padding: 5px;"
+                                        *ngIf="command.confirmed===true">confirmed</span>
+                                    <span class="badge bg-soft-danger text-danger"style="font-size:15px ;padding: 5px;"
+                                        *ngIf="command.confirmed===false">not confirmed</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> <!-- end table-responsive -->
+            </div>
+        </div> <!-- end card-->
+    </div> <!-- end col-->
+</div>
+<!-- end row-->
